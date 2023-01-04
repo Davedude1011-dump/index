@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="getContent.js" defer></script>
+        <title>INDEX - home</title>
+    </head>
+    <body>
+        <!-- PROJECT INDEX -->
+        <!-- created by -->
+
+        <a href="videoViewer.html"><button>seven deadly sins</button></a>
+
+        
+        <div class="continue-watching-panel">
+            <div class="continue-watching-title"> </div>
+            <br>
+            <a href="videoViewer.html">
+            <div class="snapshot-border">
+                <div class="snapshot-centered-text-white">Continue</div>
+                <div class="snapshot-centered-text-black">Continue</div>
+                <video id="snapshot" muted autoplay="autoplay" src=""></video>
+            </div>
+            </a>
+        </div>
+
+        <script>
+            // i don't know what kind of voodoo magic this thing does but you bet im happy about it 👍 :))))))))
+            jQuery(document).ready(function( $ ) {
+                $(window).on("load", function(e) {
+                    var recent_video_id = localStorage.getItem("most_recent_video_id")
+                    var recent_video_src = localStorage.getItem("most_recent_video_src")
+                    document.querySelector(".continue-watching-title").textContent = recent_video_id.replace(/([A-Z])/g, ' $1').trim()
+                    console.log(recent_video_id, recent_video_src)
+                });
+                var recent_video_id = localStorage.getItem("most_recent_video_id")
+                var recent_video_src = localStorage.getItem("most_recent_video_src")
+                $storedtime = localStorage.getItem(btoa(recent_video_src));
+                document.getElementById("snapshot").src = recent_video_src
+                document.getElementById("snapshot").currentTime = $storedtime;
+                document.getElementById("snapshot").addEventListener("play", function() {
+                    document.getElementById("snapshot").pause()
+                })
+                console.log($storedtime)
+             });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* continue watching panel: */
+#snapshot {
+    zoom: 0.25;
+    filter: brightness(0.7);
+    z-index: 998;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+.snapshot-border {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+.snapshot-centered-text-white {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 25px/2);
+    translate: -50% -50%;
+    z-index: 999;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: white;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+    user-select: none;
+    cursor: pointer;
+}
+.snapshot-centered-text-black {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 25px/2);
+    translate: -50% -50%;
+    z-index: 999;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: black;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+    user-select: none;
+    cursor: pointer;
+}
+.snapshot-border:hover .snapshot-centered-text-black, .snapshot-border:hover .snapshot-centered-text-white {
+    opacity: 1;
+}
+.snapshot-border:hover #snapshot {
+    filter: brightness(0.9)
+}
+.continue-watching-title {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.continue-watching-panel {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    bottom: 0;
+    left: 0;
+    margin: 1vh
+}
+/* ------------------------ */
+
+.viewer {
+    position: relative;
+    left: 50%;
+    translate: -50%;
+    padding-top: 1vh;
+}
+.viewer-top-panel {
+    position: relative;
+    width: 100vw;
+    height: fit-content;
+    padding: 1vh;
+}
+.viewer-title {
+    position: relative;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: sans-serif;
+    width: 100%;
+    text-align: center;
+}

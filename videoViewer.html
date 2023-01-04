@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="getContent.js" defer></script>
+        <title>INDEX - watching time</title>
+    </head>
+    <body>
+        <!-- PROJECT INDEX -->
+        <!-- created by -->
+
+        <div class="viewer-top-panel">
+            <div class="viewer-title">s1 e1</div>
+            <div class="viewer-title">Seven Deadly Sins</div>
+        </div>
+        <video class="viewer" id="SevenDeadlySins" controls="" src="https://rr3---sn-aigzrnse.c.drive.google.com/videoplayback?expire=1672865598&ei=_q61Y5K0IP_mwtQP1tCCuAQ&ip=2a02:c7e:4eae:e500:d95b:2f3a:ebb4:234&cp=QVRMVElfVFVXSVhPOm85RzJaZzhnWTc0Ym53ZWZneHpqay16SEZfV3RhUHJocTViMnZtdUZMaDI&id=e9846d9d20aba07b&itag=22&source=webdrive&requiressl=yes&mh=fI&mm=32&mn=sn-aigzrnse&ms=su&mv=m&mvi=3&pl=41&ttl=transient&susc=dr&driveid=1eUdV1VPVChRMbMhh4f6gtqqpLMf9xZuz&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=1471.703&lmt=1672786054518810&mt=1672850943&subapp=DRIVE_WEB_FILE_VIEWER&txp=0011224&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRAIgb-NHu_ib0bPsS0-pP319iIAT7mpaprgt78UqvSDVoUUCIEnNsljRnbVhva-BrhVunQzoGT4aU0V1tQBPMw--8DeU&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRAIgH7Y9aIpxIAETd-mv4n2PAsCIT8yv0pKzZ2a-HJTHr9gCIEhCTDjrNj5SuGrRyQAWxUf0Y63YJvHK0o5pKtpx_r4f&cpn=-6ZkI3xUbculwHpm&c=WEB_EMBEDDED_PLAYER&cver=1.20221218.00.00"></video>
+
+        <script>
+            // i don't know what kind of voodoo magic this thing does but you bet im happy about it 👍 :))))))))
+            jQuery(document).ready(function( $ ) {
+            
+                $("video").on("pause", function(event) {
+                  // Save into local storage,if you change the browser will not work
+                  localStorage.setItem(btoa(this.src), this.currentTime);
+                });
+            
+                $("video").on("play", function(event) {
+                    $storedtime = localStorage.getItem(btoa(this.src));
+                    localStorage.setItem("most_recent_video_id", this.id)
+                    localStorage.setItem("most_recent_video_src", this.src)
+        
+                    // Get the time from localStorage and play if not at the end.
+                    if ($storedtime < this.duration) 
+                        this.currentTime = $storedtime;
+            
+                    this.play();
+                    console.log($storedtime)
+                });   
+                    
+                //if you close the window and video playing store the current time
+                $(window).on("unload", function(e) {
+                   $("video").each(function(index, value) {
+                     if ( ! this.paused ) {
+                        localStorage.setItem(btoa(this.src), this.currentTime);
+                     }
+                  });
+                });
+                $(window).on("load", function(e) {
+                    var recent_video_id = localStorage.getItem("most_recent_video_id")
+                    var recent_video_src = localStorage.getItem("most_recent_video_src")
+                    console.log(recent_video_id, recent_video_src)
+                });
+                
+             });
+        </script>
+
+    </body>
+</html>
